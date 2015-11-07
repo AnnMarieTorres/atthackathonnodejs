@@ -25,7 +25,7 @@ app.post('/notifyEvent', function(req, res) {
   console.log(req.body.eventNotification);
 
   var headers = {
-    'User-Agent' : 'request',
+    'Content-Type': 'application/json',
     'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl'
   };
   var subscribeForm = {
@@ -46,7 +46,7 @@ app.post('/notifyEvent', function(req, res) {
         console.log('Subscribed');
 
         var headers = {
-          'User-Agent' : 'request',
+          'Content-Type': 'application/json',
           'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl'
         };
 
