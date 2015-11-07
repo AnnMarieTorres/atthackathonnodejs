@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use('/static', express.static('public'));
 
 var events = [];
 var calls = [];
@@ -49,7 +50,7 @@ app.post('/notifyEvent', function(req, res) {
           .send({
             "sessionId": req.body.eventNotification.callSessionIdentifier,
             "callPartyL": ["9175876292"],
-            "playURL": "http://www.clayloomis.com/Sounds/simpyoinkhomer3.wav",
+            "playURL": "http://atthackathon.azurewebsites.net/sound.wav",
             "playFormat": "audio"
           })
           .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
