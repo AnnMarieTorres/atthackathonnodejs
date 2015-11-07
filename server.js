@@ -39,9 +39,10 @@ app.post('/notifyEvent', function(req, res) {
     form: subscribeForm
   };
   console.log(subscribeForm);
+
   request(subcribeOptions, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-        console.log(body);
+        console.log('Subscribed');
 
         var headers = {
           'User-Agent' : 'request',
@@ -62,9 +63,18 @@ app.post('/notifyEvent', function(req, res) {
           form: playForm
         };
 
+        request(playOptions, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              console.log('Played');
+            }
+            else {
+              console.log('Error Playing');
+            }
+        });
+
     } else {
-      console.log(response);
-      console.log(error);
+      console.log('Error');
+      console.log(response.statusCode);
     }
   });
 
