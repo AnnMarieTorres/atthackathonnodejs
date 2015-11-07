@@ -1,6 +1,7 @@
 var http = require('http')
 var express = require('express');
 var request = require('request');
+request.debug = true;
 var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
