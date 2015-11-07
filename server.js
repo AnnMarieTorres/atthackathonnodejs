@@ -4,6 +4,7 @@ var request = require('superagent');
 var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
+var schedule = require('node-schedule');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -21,7 +22,7 @@ app.get('/calls',function(req, res) {
 });
 
 app.post('/notifyEvent', function(req, res) {
-  events.push({ event: req.body.eventNotification, date: new Date() });
+  events.push({ from: req.body.eventNotification.callingParticipant, date: new Date() });
 
   /*
   var subscriptionBody =  {
@@ -66,6 +67,8 @@ app.post('/notifyEvent', function(req, res) {
     });
 
   */
+
+  // +14252363148@1a7c784c5
 
   var deferredBody = {
     action : {
