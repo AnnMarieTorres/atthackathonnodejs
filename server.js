@@ -22,7 +22,7 @@ app.get('/calls',function(req, res) {
 });
 
 app.post('/notifyEvent', function(req, res) {
-  events.push({ from: req.body.eventNotification.callingParticipant.replace('sip:','').replace('@foundry.att.com',''), date: new Date() });
+  events.push({ from: req.body.eventNotification.callingParticipant, date: new Date() });
 
   var deferredBody = {
     action : {
@@ -101,7 +101,7 @@ app.post('/collectEvent', function(req,res) {
 }}
 */
   var selectedOption = req.body.eventNotification.eventDescription.mediaResponse;
-  var phone = req.body.eventNotification.responseFrom.replace('sip:','').replace('@foundry.att.com','');
+  var phone = req.body.eventNotification.responseFrom;
 
 
 
