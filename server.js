@@ -81,7 +81,7 @@ app.post('/notifyEvent', function(req, res) {
 
 
 
-  // +14252363148@1a7c784c5
+  // +14252363148@1a187bc5c
 
 
 });
@@ -108,6 +108,8 @@ app.post('/collectEvent', function(req,res) {
     phone: phone
   });
 
+
+  console.log('Collecting');
   res.send('OK');
 });
 
