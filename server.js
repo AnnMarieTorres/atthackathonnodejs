@@ -21,6 +21,7 @@ app.get('/calls',function(req, res) {
 
 app.post('/notifyEvent', function(req, res) {
   events.push(req.body.eventNotification);
+  console.log(req.body.eventNotification);
   res.send(events);
 });
 
