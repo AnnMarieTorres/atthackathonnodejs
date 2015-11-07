@@ -109,7 +109,7 @@ app.post('/collectEvent', function(req,res) {
   });
 
 
-  console.log('Collecting');
+  console.log(calls);
   res.send('OK');
 });
 
