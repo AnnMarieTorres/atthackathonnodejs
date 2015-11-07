@@ -68,9 +68,9 @@ app.post('/notifyEvent', function(req, res) {
   */
 
   var deferredBody = {
-    "action" : {
-      "decisionId" : "1234000000000AAAAAA",
-      "actionToPerform" : "Deferred"
+    action : {
+      decisionId : "1234000000000AAAAAA",
+      actionToPerform : "Deferred"
     }
   };
 
