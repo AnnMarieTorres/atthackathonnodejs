@@ -63,6 +63,7 @@ app.post('/notifyEvent', function(req, res) {
         };
 
     } else {
+      console.log(response);
       console.log(error);
     }
   });
