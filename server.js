@@ -111,6 +111,17 @@ app.post('/collectEvent', function(req,res) {
   });
 
 
+  request
+    .post('http://api.foundry.att.net:9001/a1/nca/subscription/eventResponse/+14252363148@1a187bc5c/1234000000000AAAAAA/EndCall?routeAddr=4252363148')
+    .send(subscriptionBody)
+    .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
+    .end(function(err, res){
+      console.log(err);
+    });
+
+
+
+
   console.log(calls);
   res.send('OK');
 });
