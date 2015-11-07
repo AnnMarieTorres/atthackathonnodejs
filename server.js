@@ -38,7 +38,7 @@ app.post('/notifyEvent', function(req, res) {
     headers: headers,
     form: subscribeForm
   };
-
+  console.log(subscribeForm);
   request(subcribeOptions, function (error, response, body) {
     if (!error && response.statusCode == 200) {
         console.log(body);
