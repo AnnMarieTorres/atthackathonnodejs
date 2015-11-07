@@ -21,9 +21,9 @@ app.get('/calls',function(req, res) {
 });
 
 app.post('/notifyEvent', function(req, res) {
-  events.push(req.body.eventNotification);
+  events.push({ event: req.body.eventNotification, date: new Date() });
 
-
+  /*
   var subscriptionBody =  {
     "sessionId": req.body.eventNotification.callSessionIdentifier,
     "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
@@ -65,7 +65,7 @@ app.post('/notifyEvent', function(req, res) {
       }
     });
 
-
+  */
 
   var deferredBody = {
     "action" : {
