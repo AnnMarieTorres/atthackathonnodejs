@@ -1,7 +1,6 @@
 var http = require('http')
 var express = require('express');
-var request = require('request');
-request.debug = true;
+var request = require('superagent');
 var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
@@ -22,64 +21,47 @@ app.get('/calls',function(req, res) {
 
 app.post('/notifyEvent', function(req, res) {
   events.push(req.body.eventNotification);
-  console.log(req.body.eventNotification);
 
-  var headers = {
-    'Content-Type': 'application/json',
-    'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl',
-    'Content-Length' : '0'
-  };
-  var subscribeForm = {
-    "sessionId": req.body.eventNotification.callSessionIdentifier,
-    "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
-    "type": "play"
-  };
-  var subcribeOptions = {
-    url: 'http://api.foundry.att.net:9001/a1/nca/interaction/subscribe',
-    method: 'POST',
-    headers: headers,
-    form: subscribeForm
-  };
-  console.log(subscribeForm);
+  request
+    .post('http://api.foundry.att.net:9001/a1/nca/interaction/subscribe')
+    .send({
+      sessionId: req.body.eventNotification.callSessionIdentifier,
+      notifyURL: "http://atthackathon.azurewebsites.net/collectEvent",
+      type: "play"
+    })
+    .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
+    .set('Content-Type','application/json')
+    .set('Content-Length','0')
+    .end(function(err, res){
 
-  request(subcribeOptions, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log('Subscribed');
+      if (err) {
+        console.log('Error subscribing');
+        console.log(err);
+      } else {
 
-        var headers = {
-          'Content-Type': 'application/json',
-          'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl',
-          'Content-Length' : '0'
-        };
-
-        var playForm = {
-          "sessionId": req.body.eventNotification.callSessionIdentifier,
-          "callPartyL": ["9175876292"],
-          "playURL": "http://www.clayloomis.com/Sounds/simpyoinkhomer3.wav",
-          "playFormat": "audio"
-        };
-
-        var playOptions = {
-          url: 'http://api.foundry.att.net:9001/a1/nca/interaction/play',
-          method: 'POST',
-          headers: headers,
-          form: playForm
-        };
-
-        request(playOptions, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-              console.log('Played');
+        request
+          .post('http://api.foundry.att.net:9001/a1/nca/interaction/play')
+          .send({
+            sessionId: req.body.eventNotification.callSessionIdentifier,
+            callPartyL: ["9175876292"],
+            playURL: "http://www.clayloomis.com/Sounds/simpyoinkhomer3.wav",
+            playFormat: "audio"
+          })
+          .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
+          .set('Content-Type','application/json')
+          .set('Content-Length','0')
+          .end(function(err, res){
+            if (err) {
+              console.log('Error playing');
+              console.log(err);
+            } else {
+              console.log('MMok');
             }
-            else {
-              console.log('Error Playing');
-            }
-        });
+          });
+      }
+    });
 
-    } else {
-      console.log('Error');
-      console.log(response.statusCode);
-    }
-  });
+
 
   res.send('OK');
 });
