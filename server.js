@@ -1,6 +1,6 @@
 var http = require('http')
 var express = require('express');
-
+var request = require('request');
 var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
@@ -22,7 +22,50 @@ app.get('/calls',function(req, res) {
 app.post('/notifyEvent', function(req, res) {
   events.push(req.body.eventNotification);
   console.log(req.body.eventNotification);
-  res.send(events);
+
+  var headers = {
+    'User-Agent' : 'request',
+    'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl'
+  };
+  var subscribeForm = {
+    "sessionId": req.body.eventNotification.callSessionIdentifier,
+    "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
+    "type": "play"
+  };
+  var subcribeOptions = {
+    url: 'http://api.foundry.att.net:9001/a1/nca/interaction/subscribe',
+    method: 'POST',
+    headers: headers,
+    form: subscribeForm
+  };
+
+  request(subcribeOptions, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(body);
+
+        var headers = {
+          'User-Agent' : 'request',
+          'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl'
+        };
+
+        var playForm = {
+          "sessionId": req.body.eventNotification.callSessionIdentifier,
+          "callPartyL": ["9175876292"],
+          "playURL": "http://www.clayloomis.com/Sounds/simpyoinkhomer3.wav",
+          "playFormat": "audio"
+        };
+
+        var playOptions = {
+          url: 'http://api.foundry.att.net:9001/a1/nca/interaction/play',
+          method: 'POST',
+          headers: headers,
+          form: playForm
+        };
+
+    }
+  });
+
+  res.send('OK');
 });
 
 app.post('/collectEvent', function(req,res) {
@@ -47,6 +90,7 @@ app.post('/collectEvent', function(req,res) {
     phone: phone
   });
 
+  res.send('OK');
 });
 
 
