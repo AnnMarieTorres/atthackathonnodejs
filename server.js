@@ -69,7 +69,7 @@ app.post('/notifyEvent', function(req, res) {
 
   res.json({
     "action" : {
-      "sessionId" : req.body.eventNotification.callSessionIdentifier,
+      "decisionId" : "1234",
       "actionToPerform" : "Deferred"
     }
   });
