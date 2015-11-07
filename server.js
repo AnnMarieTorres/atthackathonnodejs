@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/static', express.static('public'));
+app.use('/', express.static('public'));
 
 var events = [];
 var calls = [];
@@ -19,6 +19,17 @@ app.get('/events',function(req, res) {
 
 app.get('/calls',function(req, res) {
   res.json(events);
+});
+
+app.post('/recall', function(req,res){
+  request
+    .post('http://api.foundry.att.net:9001/a1/nca/callcontrol/call/4252363148/4047241365')
+    .send(subscriptionBody)
+    .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
+    .end(function(err, res){
+      console.log(err);
+    });
+    res.send('OK');
 });
 
 app.post('/notifyEvent', function(req, res) {
