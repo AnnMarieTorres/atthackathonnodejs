@@ -23,6 +23,7 @@ app.get('/calls',function(req, res) {
 app.post('/notifyEvent', function(req, res) {
   events.push(req.body.eventNotification);
 
+/*
   var subscriptionBody =  {
     "sessionId": req.body.eventNotification.callSessionIdentifier,
     "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
@@ -36,8 +37,6 @@ app.post('/notifyEvent', function(req, res) {
     .post('http://api.foundry.att.net:9001/a1/nca/interaction/subscribe')
     .send(subscriptionBody)
     .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
-    .set('Content-Type','application/json')
-//    .set('Content-Length','0')
     .end(function(err, res){
 
       if (err) {
@@ -55,7 +54,6 @@ app.post('/notifyEvent', function(req, res) {
           })
           .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
           .set('Content-Type','application/json')
-//          .set('Content-Length','0')
           .end(function(err, res){
             if (err) {
               console.log('Error playing');
@@ -67,9 +65,14 @@ app.post('/notifyEvent', function(req, res) {
       }
     });
 
+*/
 
-
-  res.send('OK');
+  res.json({
+    "action" : {
+      "sessionId" : req.body.eventNotification.callSessionIdentifier,
+      "actionToPerform" : "Deferred"
+    }
+  });
 });
 
 app.post('/collectEvent', function(req,res) {
