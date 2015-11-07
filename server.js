@@ -62,6 +62,8 @@ app.post('/notifyEvent', function(req, res) {
           form: playForm
         };
 
+    } else {
+      console.log(error);
     }
   });
 
