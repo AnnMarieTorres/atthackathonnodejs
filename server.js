@@ -26,7 +26,8 @@ app.post('/notifyEvent', function(req, res) {
 
   var headers = {
     'Content-Type': 'application/json',
-    'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl'
+    'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl',
+    'Content-Length' : '0'
   };
   var subscribeForm = {
     "sessionId": req.body.eventNotification.callSessionIdentifier,
@@ -47,7 +48,8 @@ app.post('/notifyEvent', function(req, res) {
 
         var headers = {
           'Content-Type': 'application/json',
-          'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl'
+          'Authorization' : 'Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl',
+          'Content-Length' : '0'
         };
 
         var playForm = {
