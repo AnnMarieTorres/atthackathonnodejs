@@ -4,11 +4,11 @@ var app = express();
 var port = process.env.PORT || 1337;
 
 app.get('/',function(req, res) {
-  res.send(events);
+  res.send('events');
 });
 
 app.get('/count',function(req, res) {
-  res.send(1);
+  res.send('12345');
 });
 
 app.post('/notifyEvent', function(req, res) {
