@@ -4,7 +4,7 @@ var request = require('superagent');
 var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
-var schedule = require('node-schedule');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
