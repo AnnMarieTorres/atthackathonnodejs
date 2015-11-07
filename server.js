@@ -25,9 +25,9 @@ app.post('/notifyEvent', function(req, res) {
   request
     .post('http://api.foundry.att.net:9001/a1/nca/interaction/subscribe')
     .send({
-      sessionId: req.body.eventNotification.callSessionIdentifier,
-      notifyURL: "http://atthackathon.azurewebsites.net/collectEvent",
-      type: "play"
+      "sessionId": req.body.eventNotification.callSessionIdentifier,
+      "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
+      "type": "play"
     })
     .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
     .set('Content-Type','application/json')
@@ -42,10 +42,10 @@ app.post('/notifyEvent', function(req, res) {
         request
           .post('http://api.foundry.att.net:9001/a1/nca/interaction/play')
           .send({
-            sessionId: req.body.eventNotification.callSessionIdentifier,
-            callPartyL: ["9175876292"],
-            playURL: "http://www.clayloomis.com/Sounds/simpyoinkhomer3.wav",
-            playFormat: "audio"
+            "sessionId": req.body.eventNotification.callSessionIdentifier,
+            "callPartyL": ["9175876292"],
+            "playURL": "http://www.clayloomis.com/Sounds/simpyoinkhomer3.wav",
+            "playFormat": "audio"
           })
           .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
           .set('Content-Type','application/json')
