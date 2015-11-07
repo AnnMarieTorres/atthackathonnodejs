@@ -36,7 +36,7 @@ app.post('/notifyEvent', function(req, res) {
     .send(subscriptionBody)
     .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
     .set('Content-Type','application/json')
-    .set('Content-Length','0')
+//    .set('Content-Length','0')
     .end(function(err, res){
 
       if (err) {
@@ -54,7 +54,7 @@ app.post('/notifyEvent', function(req, res) {
           })
           .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
           .set('Content-Type','application/json')
-          .set('Content-Length','0')
+//          .set('Content-Length','0')
           .end(function(err, res){
             if (err) {
               console.log('Error playing');
