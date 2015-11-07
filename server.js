@@ -24,7 +24,7 @@ app.get('/calls',function(req, res) {
 app.post('/notifyEvent', function(req, res) {
   events.push({ from: req.body.eventNotification.callingParticipant, date: new Date() });
 
-  /*
+
   var subscriptionBody =  {
     "sessionId": req.body.eventNotification.callSessionIdentifier,
     "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
@@ -49,7 +49,7 @@ app.post('/notifyEvent', function(req, res) {
           .post('http://api.foundry.att.net:9001/a1/nca/interaction/play')
           .send({
             "sessionId": req.body.eventNotification.callSessionIdentifier,
-            "callPartyL": ["9175876292"],
+            "callPartyL": ["4047241365"],
             "playURL": "http://atthackathon.azurewebsites.net/sound.wav",
             "playFormat": "audio"
           })
@@ -66,7 +66,7 @@ app.post('/notifyEvent', function(req, res) {
       }
     });
 
-  */
+
 
   // +14252363148@1a7c784c5
 
