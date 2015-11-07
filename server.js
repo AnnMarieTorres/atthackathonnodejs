@@ -5,21 +5,18 @@ var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/',function(req, res) {
-  res.send('events');
-});
+var events = [];
 
-app.get('/count',function(req, res) {
-  res.send('12345');
+app.get('/events',function(req, res) {
+  res.json(events);
 });
 
 app.post('/notifyEvent', function(req, res) {
-  console.log(req.body);
-  res.json(req.body);
+  events.push(req.body.eventNotification);
+  res.send(events);
 });
 
 
