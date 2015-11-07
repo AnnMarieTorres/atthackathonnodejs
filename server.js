@@ -31,49 +31,53 @@ app.post('/notifyEvent', function(req, res) {
     }
   };
 
+  setTimeout(function(){
+    console.log('Timer');
+    var subscriptionBody =  {
+      "sessionId": req.body.eventNotification.callSessionIdentifier,
+      "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
+      "type": "play"
+    };
+
+    console.log('Calling subscribe');
+    console.log(subscriptionBody);
+
+    request
+      .post('http://api.foundry.att.net:9001/a1/nca/interaction/subscribe')
+      .send(subscriptionBody)
+      .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
+      .end(function(err, res){
+
+        if (err) {
+          console.log('Error subscribing');
+          console.log(err);
+        } else {
+
+          request
+            .post('http://api.foundry.att.net:9001/a1/nca/interaction/play')
+            .send({
+              "sessionId": req.body.eventNotification.callSessionIdentifier,
+              "callPartyL": ["4047241365"],
+              "playURL": "http://atthackathon.azurewebsites.net/sound.wav",
+              "playFormat": "audio"
+            })
+            .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
+            .set('Content-Type','application/json')
+            .end(function(err, res){
+              if (err) {
+                console.log('Error playing');
+                console.log(err);
+              } else {
+                console.log('MMok');
+              }
+            });
+        }
+      });
+  }, 2000);
+
   console.log(deferredBody);
   res.json(deferredBody);
-  
-  var subscriptionBody =  {
-    "sessionId": req.body.eventNotification.callSessionIdentifier,
-    "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
-    "type": "play"
-  };
 
-  console.log('Calling subscribe');
-  console.log(subscriptionBody);
-
-  request
-    .post('http://api.foundry.att.net:9001/a1/nca/interaction/subscribe')
-    .send(subscriptionBody)
-    .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
-    .end(function(err, res){
-
-      if (err) {
-        console.log('Error subscribing');
-        console.log(err);
-      } else {
-
-        request
-          .post('http://api.foundry.att.net:9001/a1/nca/interaction/play')
-          .send({
-            "sessionId": req.body.eventNotification.callSessionIdentifier,
-            "callPartyL": ["4047241365"],
-            "playURL": "http://atthackathon.azurewebsites.net/sound.wav",
-            "playFormat": "audio"
-          })
-          .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
-          .set('Content-Type','application/json')
-          .end(function(err, res){
-            if (err) {
-              console.log('Error playing');
-              console.log(err);
-            } else {
-              console.log('MMok');
-            }
-          });
-      }
-    });
 
 
 
