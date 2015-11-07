@@ -67,12 +67,15 @@ app.post('/notifyEvent', function(req, res) {
 
 */
 
-  res.json({
+  var deferredBody = {
     "action" : {
       "decisionId" : "1234",
       "actionToPerform" : "Deferred"
     }
-  });
+  };
+
+  console.log(deferredBody);
+  res.send(deferredBody);
 });
 
 app.post('/collectEvent', function(req,res) {
