@@ -24,7 +24,7 @@ app.get('/calls',function(req, res) {
 app.post('/recall', function(req,res){
   request
     .post('http://api.foundry.att.net:9001/a1/nca/callcontrol/call/4252363148/4047241365')
-    .send(subscriptionBody)
+    .send({})
     .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
     .end(function(err, res){
       console.log(err);
