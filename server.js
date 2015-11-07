@@ -22,13 +22,18 @@ app.get('/calls',function(req, res) {
 app.post('/notifyEvent', function(req, res) {
   events.push(req.body.eventNotification);
 
+  var subscriptionBody =  {
+    "sessionId": req.body.eventNotification.callSessionIdentifier,
+    "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
+    "type": "play"
+  };
+
+  console.log('Calling subscribe');
+  console.log(subscriptionBody);
+
   request
     .post('http://api.foundry.att.net:9001/a1/nca/interaction/subscribe')
-    .send({
-      "sessionId": req.body.eventNotification.callSessionIdentifier,
-      "notifyURL": "http://atthackathon.azurewebsites.net/collectEvent",
-      "type": "play"
-    })
+    .send(subscriptionBody)
     .set('Authorization','Bearer hiTzTf0ox3Cry8wGKeGOrzschFQl')
     .set('Content-Type','application/json')
     .set('Content-Length','0')
